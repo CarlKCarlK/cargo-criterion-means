@@ -1,0 +1,17 @@
+[package]
+description = "Command-line program to gather the mean and standard error values from criterion benchmarks."
+name = "cargo-criterion-means"
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/CarlKCarlK/cargo-criterion-means"
+readme = "README.md"
+authors = ["Carl Kadie"]
+license = "MIT OR Apache-2.0"
+keywords = ["benchmark", "criterion"]
+categories = ["development-tools::profiling", "development-tools::testing"]
+homepage = "https://github.com/CarlKCarlK/cargo-criterion-means"
+
+
+[dependencies]
+serde_json = "1.0"
+walkdir = "2"
