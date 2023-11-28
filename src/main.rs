@@ -5,14 +5,10 @@ use walkdir::WalkDir;
 fn main() {
     // Get the first command line argument or use "." as default
     let cwd = env::current_dir().expect("Failed to get current working directory");
-    println!("cwd: {}", cwd.display());
-    let v = env::args().collect::<Vec<_>>();
-    println!("args: {:?}", v);
     let base_dir = env::args().nth(2).unwrap_or_else(|| ".".to_string());
-    println!("base_dir: {}", base_dir);
     let start_dir = cwd.join(base_dir).join("target/criterion");
 
-    println!("start_dir: {}", start_dir.display());
+    // println!("start_dir: {}", start_dir.display());
 
     println!("Group,Id,Mean(ns),StdErr(ns)");
     for entry in WalkDir::new(start_dir).into_iter().filter_map(|e| e.ok()) {

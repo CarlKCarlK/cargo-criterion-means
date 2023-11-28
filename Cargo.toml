@@ -1,7 +1,7 @@
 [package]
 description = "Command-line program to gather the mean and standard error values from criterion benchmarks."
 name = "cargo-criterion-means"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 edition = "2021"
 repository = "https://github.com/CarlKCarlK/cargo-criterion-means"
 readme = "README.md"
