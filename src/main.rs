@@ -10,7 +10,7 @@ fn main() {
 
     // println!("start_dir: {}", start_dir.display());
 
-    println!("Group,Id,Mean(ns),StdErr(ns)");
+    println!("Group,Id,Parameter,Mean(ns),StdErr(ns)");
     for entry in WalkDir::new(start_dir).into_iter().filter_map(|e| e.ok()) {
         let path = entry.path();
         // println!("path: {}", path.display());
@@ -37,12 +37,27 @@ fn main() {
                             .components()
                             .map(|c| c.as_os_str().to_str().unwrap_or(""))
                             .collect();
-                        let benchmark_group = components[components.len() - 4];
-                        let function = components[components.len() - 3];
-                        println!(
-                            "{},{},{},{}",
-                            benchmark_group, function, mean, standard_error
-                        );
+                        // println!("components: {:?}", components);
+
+                        let target_index = components
+                            .iter()
+                            .position(|&component| component == "target")
+                            .expect("'target' not found.");
+                        let criterion_index = &components[target_index + 1..]
+                            .iter()
+                            .position(|&component| component == "criterion")
+                            .expect("'criterion' not found after 'target'.");
+
+                        let rest_slice = &components[target_index + criterion_index + 2..];
+                        // println!("rest_slice: {:?}", rest_slice);
+                        let rest_slice = &rest_slice[..rest_slice.len() - 2];
+                        // println!("rest_slice2: {:?}", rest_slice);
+                        let mut rest = rest_slice.join(",");
+                        if rest_slice.len() == 2 {
+                            rest = format!("{},", rest);
+                        }
+
+                        println!("{},{},{}", rest, mean, standard_error);
                     } else {
                         println!("{},missing", path.display());
                     }
