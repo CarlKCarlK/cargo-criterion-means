@@ -1,7 +1,7 @@
 cargo-criterion-means
 ==========
 
-Command-line program to gather the mean and standard error values
+Cargo command to gather the mean and standard error values
 from criterion benchmarks.
 
 Install
